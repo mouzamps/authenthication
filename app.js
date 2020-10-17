@@ -7,14 +7,19 @@ const cors =require('cors');
 const app=express();
 
 app.use(express.static("public"));
-app.use('view engine', 'ejs');
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get("/",function(req,res){
-    res.sendFile(__dirname+"/index.html")
-
-})
+    res.render("home")
+});
+app.get("/login",function(req,res){
+    res.render("login")
+});
+app.get("/register",function(req,res){
+    res.render("register")
+});
 
 
 
