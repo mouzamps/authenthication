@@ -1,11 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const ejs = require("ejs");
 const multer = require('multer');
 const cors =require('cors');
 
 const app=express();
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static("public"));
+app.use('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.get("/",function(req,res){
     res.sendFile(__dirname+"/index.html")
