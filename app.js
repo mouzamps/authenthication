@@ -1,3 +1,4 @@
+require('dotenv').config();  //envirionment viriable for hiding secret keys while publishing to github etc
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require("ejs");
