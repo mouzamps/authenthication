@@ -6,7 +6,7 @@ const multer = require('multer');
 const cors =require('cors');
 const mongoose = require('mongoose');
 // const encrypt = require('mongoose-encryption');
-const md5 = require('md5');
+const bcrypt = require('bcrypt');
 
 const app=express();
 
