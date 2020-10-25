@@ -65,6 +65,10 @@ app.get("/secrets",function(req,res){
         res.redirect("/login");
     }
 });
+app.get("/logout",function(req,res){
+    req.logout();
+    res.redirect("/");
+});
 
 app.post("/register",function(req,res){
     // bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
