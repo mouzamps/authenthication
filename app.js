@@ -12,6 +12,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const { use } = require('passport');
+const { parallel } = require('async');
 
 
 
@@ -57,6 +58,14 @@ app.get("/login",function(req,res){
 app.get("/register",function(req,res){
     res.render("register")
 });
+app.get("/secrets",function(req,res){
+    if(req.isAuthenticated()){
+        res.render("secrets");
+    }else{
+        res.redirect("/login");
+    }
+});
+
 app.post("/register",function(req,res){
     // bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
     //     const newUser = new User({
@@ -71,6 +80,16 @@ app.post("/register",function(req,res){
     //         }
     //     });
     // });
+    User.register({username: req.body.password},req.body.password,function(err,user){
+        if(err){
+            console.log(err);
+            res.redirect("/register");
+        }else{
+            passport.authenticate("local")(req,res,function(){
+                res.redirect("/secrets");
+            });
+        }
+    });
     
 });
 
